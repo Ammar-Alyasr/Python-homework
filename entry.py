@@ -19,12 +19,23 @@ e = Entry(master, width=50)
 e.pack()
 
 
-def callback():
-    top = Toplevel()
+def kiralayici():
+    kiraSayfasi = Toplevel()
+    kiraSayfasi.minsize(400,400)
     print e.get()
 
-b = Button(master, text="get", width=10, command=callback)
+
+
+def yonetici():
+    yoneticiSayfasi = Toplevel()
+    yoneticiSayfasi.minsize(400,400)
+    print e.get()
+
+b = Button(master, text="kiralayici", width=10, command=kiralayici)
 b.pack()
+
+b1 = Button(master, text="yoneticin", width=10, command=yonetici)
+b1.pack()
 #texbox ve button ekleme
 
 
