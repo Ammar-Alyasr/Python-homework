@@ -1,4 +1,4 @@
-from Tkinter import *
+from Tk import *
 
 
 master = Tk()
