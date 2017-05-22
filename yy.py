@@ -10,6 +10,12 @@ from tkinter.ttk import Panedwindow
 vt = sqlite3.connect("dukkan.db")
 im = vt.cursor()
 im.execute("CREATE TABLE IF NOT EXISTS kiralayicilar(adSoyad,Tc,saat)")
+im.execute("CREATE TABLE IF NOT EXISTS yoneticiler(yoneticiAd, yoneticiSifre)")
+im.execute("INSERT INTO yoneticiler (yoneticiAd,yoneticiSifre) VALUES(?,?)",
+           ("root","toor"))
+vt.commit()
+
+
 root = Tk()
 root.configure(background="grey")
 root.minsize(500, 400)
@@ -196,19 +202,33 @@ def yonetici():
     yoneticiSayfasi.title('Hos geldin (Yönetici)... ')
 
     global username_guess,password_guess
-    username_text = Label(yoneticiSayfasi, text="Kullanci ismi: ", bg="tan").pack()
+    username_text = Label(yoneticiSayfasi, text="Kullanci ismi: ", bg="tan")
+    username_text.grid(row=0, column=5)
 
-    username_guess = Entry(yoneticiSayfasi).pack()
-    password_text = Label(yoneticiSayfasi, text="Şifre:", bg="tan").pack()
-    password_guess = Entry(yoneticiSayfasi, show="*").pack()
-    b=Button(yoneticiSayfasi, text=" GİR ", width=15, bg="tan",command=gir).pack(side=BOTTOM)
+    username_guess = Entry(yoneticiSayfasi)
+    username_guess.grid(row=2, column=5)
 
 
+
+    password_text = Label(yoneticiSayfasi, text="Şifre:", bg="tan")
+    password_text.grid(row=5, column=5)
+
+    password_guess = Entry(yoneticiSayfasi)
+    password_guess.grid(row=7, column=5)
+    b=Button(yoneticiSayfasi, text=" GİR ", width=15, bg="tan",command=gir)
+    b.grid(row=10, column=5)
+
+im.execute("SELECT * FROM yoneticiler")
+yontici_Bilgileri = im.fetchall()
+print(yontici_Bilgileri[0][0])
 
 
 def gir():
-    if (username_guess.get()!= "mudur" and password_guess.get()!="123"):
-        messagebox.showinfo("-- ERROR --", "Lütfen, Giridiğiniz Şefre yanliştir!...")
+    im.execute("SELECT * FROM yoneticiler")
+    yontici_Bilgileri = im.fetchall()
+    print(username_guess.get())
+    if (username_guess.get()!= yontici_Bilgileri and password_guess.get()!=yontici_Bilgileri[0][1]):
+        messagebox.showinfo("-- HATA --", "Girdiğiniz Bilgiler Hatalıdır...")
 
     else:
         girsayfasi = Tk()
