@@ -9,8 +9,9 @@ from tkinter.ttk import Panedwindow
 
 vt = sqlite3.connect("dukkan.db")
 im = vt.cursor()
-im.execute("CREATE TABLE IF NOT EXISTS kiralayicilar(adSoyad,Tc,saat)")
+im.execute("CREATE TABLE IF NOT EXISTS kiralayicilar(adSoyad,Tc,saat,ucret)")
 im.execute("CREATE TABLE IF NOT EXISTS yoneticiler(yoneticiAd, yoneticiSifre)")
+im.execute("CREATE TABLE IF NOT EXISTS ucretler(ucret)")
 im.execute("INSERT INTO yoneticiler (yoneticiAd,yoneticiSifre) VALUES(?,?)",
            ("root","toor"))
 vt.commit()
@@ -149,6 +150,9 @@ def iade():
         sonsonuc = round(sonsonuc, 2)
         print(sonsonuc)
 
+        im.execute("INSERT INTO ucretler(ucret) VALUES(?)",
+                   (sonsonuc,))
+        im.fetchall()
 
 
         kiralayiciSayfasi3 = Tk()
@@ -197,8 +201,8 @@ def yonetici():
 
     yoneticiSayfasi = Tk()
     yoneticiSayfasi.configure(background="grey")
-    yoneticiSayfasi.minsize(300, 300)
-    yoneticiSayfasi.maxsize(300, 300)
+    yoneticiSayfasi.minsize(150, 150)
+    yoneticiSayfasi.maxsize(150, 150)
     yoneticiSayfasi.title('Hos geldin (Yönetici)... ')
 
     global username_guess,password_guess
@@ -232,13 +236,20 @@ def gir():
 
     else:
         girsayfasi = Tk()
-        girsayfasi.configure(background="grey")
-        byon = Button(girsayfasi, text=" kiralayaci ", width=30, height=3, bg="tan")
-        byon.pack(padx=20, pady=30)
-        byon1 = Button(girsayfasi, text=" Bisikletler ", width=30, height=3, bg="tan")
-        byon1.pack(padx=20, pady=30)
-        byon2 = Button(girsayfasi, text=" Hisaplar ", width=30, height=3, bg="tan")
-        byon2.pack(padx=20, pady=30)
+
+
+
+        txtToplam= Label(girsayfasi, text="Toplam Elde Edilen", bg="red")
+        txtToplam.pack(padx=20, pady=30)
+
+        txtToplam2 = Label(girsayfasi, bg="white")
+        txtToplam2.pack(padx=20, pady=30)
+
+
+        im.execute("SELECT SUM(ucret) FROM ucretler")
+        ucretler = im.fetchall()
+        print(ucretler)
+        txtToplam2.config(text=(ucretler,"TL"))
 
 
 
