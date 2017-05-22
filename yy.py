@@ -240,17 +240,22 @@ def gir():
 
 
         txtToplam= Label(girsayfasi, text="Toplam Elde Edilen", bg="red")
-        txtToplam.pack(padx=20, pady=30)
+        txtToplam.pack(padx=10, pady=10)
 
         txtToplam2 = Label(girsayfasi, bg="white")
-        txtToplam2.pack(padx=20, pady=30)
+        txtToplam2.pack(padx=10, pady=10)
 
 
         im.execute("SELECT SUM(ucret) FROM ucretler")
         ucretler = im.fetchall()
         print(ucretler)
-        txtToplam2.config(text=(ucretler,"TL"))
+        if(ucretler=="None"):
+            txtToplam2.config(text="Kasiyer Boştur..")
+        else:   
+            txtToplam2.config(text=(ucretler,"TL"))
 
+        b2 = Button(girsayfasi, text="Günü Sonlandır!", bg="tan")
+        b2.pack(padx=30, pady=30)
 
 
 b2 = Button(root, text="Kıralayıcı", width=30,height=5, command=kiralayici,bg="tan")
