@@ -18,36 +18,38 @@ vt.commit()
 
 
 root = Tk()
-root.configure(background="#008ae6")
+root.configure(background="#264d73")
 root.minsize(500, 400)
 root.maxsize(500, 400)
 root.title("Biseklet Kiralama ...")
 
 def kiralayici():
     kiralayiciSayfasi = Tk()
-    kiralayiciSayfasi.configure(background="#008ae6")
+    kiralayiciSayfasi.configure(background="#264d73")
     kiralayiciSayfasi.minsize(400, 300)
     kiralayiciSayfasi.maxsize(400, 300)
     kiralayiciSayfasi.title('Hos geldin... ')
 
     global txtisim, txttc
-    lblisim = Label(kiralayiciSayfasi, text=" AD SOYAD ",bg="#ffa366")
+    lblisim = Label(kiralayiciSayfasi, text=" AD SOYAD ",bg="#d9d9f2")
     lblisim.grid(row=3, column=3)
 
     txtisim = Entry(kiralayiciSayfasi)
     txtisim.grid(row=3, column=5)
 
-    lbltc = Label(kiralayiciSayfasi, text="TC",bg="#ffa366")
+    lbltc = Label(kiralayiciSayfasi, text="TC",bg="#d9d9f2")
     lbltc.grid(row=5, column=3)
 
     txttc = Entry(kiralayiciSayfasi)
     txttc.grid(row=5, column=5)
 
-    b2 = Button(kiralayiciSayfasi, text=" AL ", width=15, command=al,bg="#ffa366")
-    b2.grid(row=7,column=2)
-    b3 = Button(kiralayiciSayfasi, text=" Iade Et ", width=15, command=iade,bg="#ffa366")
-    b3.grid(row=7,column=3)
-
+    b2 = Button(kiralayiciSayfasi, text=" AL ", width=15, command=al,bg="#d9d9f2")
+    b2.grid(row=6,column=4)
+    b3 = Button(kiralayiciSayfasi, text=" Iade Et ", width=15, command=iade,bg="#d9d9f2")
+    b3.grid(row=6,column=5)
+im.execute("update kiralayicilar set saat=(?)",
+                ("09:07:00",))
+vt.commit()
 
 
 def al():
@@ -62,15 +64,15 @@ def al():
 
 
         kiralayiciSayfasi4= Tk()
-        kiralayiciSayfasi4.configure(background='#008ae6')
-        lblal1 = Label(kiralayiciSayfasi4, text="Başarılı bir şekilde kırallandı,bisiklet kulanabilirsiniz...",font="elephant",bg="#ffa366", fg="white")
+        kiralayiciSayfasi4.configure(background='#264d73')
+        lblal1 = Label(kiralayiciSayfasi4, text="Başarılı bir şekilde kırallandı,bisiklet kulanabilirsiniz...",font="elephant",bg="#d9d9f2")
         lblal1.pack(padx=7, pady=3, side=TOP)
-        lblal = Label(kiralayiciSayfasi4, text="isim",bg="#ffa366").pack(padx=10, pady=5, side=TOP)
+        lblal = Label(kiralayiciSayfasi4, text="isim",bg="#d9d9f2").pack(padx=10, pady=5, side=TOP)
         lblal= Label(kiralayiciSayfasi4, text=txtisim.get()).pack(padx=10, pady=5, side=TOP)
-        lblal = Label(kiralayiciSayfasi4, text=" Saat ",bg="#ffa366").pack(padx=10, pady=5, side=TOP)
+        lblal = Label(kiralayiciSayfasi4, text=" Saat ",bg="#d9d9f2").pack(padx=10, pady=5, side=TOP)
         lblal = Label(kiralayiciSayfasi4, text=time.strftime("%H:%M:%S")).pack(padx=10, pady=5, side=TOP)
         print(txtisim)
-        b5 = Button(kiralayiciSayfasi4, text=" Tamam ", command=quit, width=10,bg="#ffa366")
+        b5 = Button(kiralayiciSayfasi4, text=" Tamam ", command=quit, width=10,bg="#d9d9f2")
         b5.pack(padx=20, pady=50, side=BOTTOM)
     else:
         messagebox.showerror("Hata", "Dikkat!! TC Kutusu Boş Bırakılamaz!!")
@@ -145,7 +147,7 @@ def iade():
 
         toplam_saat = float(toplam_saat)
 
-        sonsonuc = toplam_saat * 4.0  # bir saatlik ucreti 4 TL dir
+        sonsonuc = toplam_saat * 10.0  # bir saatlik ucreti 4 TL dir
         # sonsonuc=float(sonsonuc)
         sonsonuc = round(sonsonuc, 2)
         print(sonsonuc)
@@ -156,22 +158,22 @@ def iade():
 
 
         kiralayiciSayfasi3 = Tk()
-        kiralayiciSayfasi3.configure(background="#008ae6")
-        lbliade = Label(kiralayiciSayfasi3, text=" isim ",bg="#ffa366").pack(padx=10, pady=5, side=TOP)
+        kiralayiciSayfasi3.configure(background="#264d73")
+        lbliade = Label(kiralayiciSayfasi3, text=" isim ",bg="#d9d9f2").pack(padx=10, pady=5, side=TOP)
         lbliade = Label(kiralayiciSayfasi3, text=veriler[0][0]).pack(padx=10, pady=5, side=TOP)
 
-        lbliade = Label(kiralayiciSayfasi3, text=" Başlangic Saat ",bg="#ffa366").pack(padx=10, pady=5, side=TOP)
+        lbliade = Label(kiralayiciSayfasi3, text=" Başlangic Saat ",bg="#d9d9f2").pack(padx=10, pady=5, side=TOP)
         lbliade = Label(kiralayiciSayfasi3, text=veriler[0][2]).pack(padx=10, pady=5, side=TOP)
 
-        lbliade = Label(kiralayiciSayfasi3, text=" Bitiş Saat ",bg="#ffa366").pack(padx=10, pady=5, side=TOP)
+        lbliade = Label(kiralayiciSayfasi3, text=" Bitiş Saat ",bg="#d9d9f2").pack(padx=10, pady=5, side=TOP)
         lbliade = Label(kiralayiciSayfasi3, text=time.strftime("%H:%M:%S")).pack(padx=10, pady=5, side=TOP)
 
-        lbliade = Label(kiralayiciSayfasi3, text=" Ücret ", bg="#ffa366").pack(padx=10, pady=5, side=TOP)
+        lbliade = Label(kiralayiciSayfasi3, text=" Ücret ", bg="#d9d9f2").pack(padx=10, pady=5, side=TOP)
         lbliade = Label(kiralayiciSayfasi3, text=sonsonuc).pack(padx=10, pady=5, side=TOP)
 
-        b5 = Button(kiralayiciSayfasi3, text=" Vazgeç ",command=message1 ,width=15,bg="#ffa366")
+        b5 = Button(kiralayiciSayfasi3, text=" Vazgeç ",command=quit ,width=15,bg="#d9d9f2")
         b5.pack(padx=20, pady=50, side=LEFT)
-        b6 = Button(kiralayiciSayfasi3, text=" Iade Et ",command=message2, width=15,bg="#ffa366")
+        b6 = Button(kiralayiciSayfasi3, text=" Iade Et ",command=quit, width=15,bg="#d9d9f2")
         b6.pack(padx=20, pady=50, side=RIGHT)
 
         im.execute("DELETE FROM kiralayicilar where Tc=(?)", [txttc.get()])
@@ -180,33 +182,16 @@ def iade():
     else:
         messagebox.showerror("Hata","Boşluk Bırakılamaz !!")
 
-def message1():
-    messagebox.askyesno(title="Vazgeç", message="Sayfadan çikmak istiyor musunuz?...")
-def message2():
-    messagebox.askyesno(title="Iade Et", message="Sayfadan çikmak istiyor musunuz?...")
-
 def yonetici():
 
-    #
-    # print("Trying to login...")
-
-    # if user == username:
-    #     messagebox.showinfo("-- COMPLETE --", "Girdiğiniz Kullancı ismi doğrudur...", icon="info")
-    # elif user!=username:
-    #     messagebox.showinfo("-- ERROR --", "Lütfen, Giridiğiniz kullancı isim yanliştir!...", icon="warning")
-    # elif pas== password:
-    #     messagebox.showinfo("-- COMPLETE --", "Girdiğiniz Şefre doğrudur...", icon="info")
-    # else:
-    #     messagebox.showinfo("-- ERROR --", "Lütfen, Giridiğiniz Şefre yanliştir!...", icon="warning")
-
     yoneticiSayfasi = Tk()
-    yoneticiSayfasi.configure(background="#008ae6")
+    yoneticiSayfasi.configure(background="#264d73")
     yoneticiSayfasi.minsize(150, 150)
     yoneticiSayfasi.maxsize(150, 150)
     yoneticiSayfasi.title('Hos geldin (Yönetici)... ')
 
     global username_guess,password_guess
-    username_text = Label(yoneticiSayfasi, text="Kullanci ismi: ", bg="#ffa366")
+    username_text = Label(yoneticiSayfasi, text="Kullanci ismi: ", bg="#d9d9f2")
     username_text.grid(row=0, column=5)
 
     username_guess = Entry(yoneticiSayfasi)
@@ -214,12 +199,12 @@ def yonetici():
 
 
 
-    password_text = Label(yoneticiSayfasi, text="Şifre:", bg="#ffa366")
+    password_text = Label(yoneticiSayfasi, text="Şifre:", bg="#d9d9f2")
     password_text.grid(row=5, column=5)
 
     password_guess = Entry(yoneticiSayfasi)
     password_guess.grid(row=7, column=5)
-    b=Button(yoneticiSayfasi, text=" GİR ", width=15, bg="#ffa366",command=gir)
+    b=Button(yoneticiSayfasi, text=" GİR ", width=15, bg="#d9d9f2",command=gir)
     b.grid(row=10, column=5)
 
 im.execute("SELECT * FROM yoneticiler")
@@ -236,27 +221,23 @@ def gir():
 
     else:
         girsayfasi = Tk()
+        girsayfasi.configure(background="#264d73")
 
 
+        txtToplam= Label(girsayfasi, text="Toplam Elde Edilen", bg="#d9d9f2")
+        txtToplam.pack(padx=20, pady=30)
 
-        txtToplam= Label(girsayfasi, text="Toplam Elde Edilen", bg="red")
-        txtToplam.pack(padx=10, pady=10)
-
-        txtToplam2 = Label(girsayfasi, bg="white")
-        txtToplam2.pack(padx=10, pady=10)
+        txtToplam2 = Label(girsayfasi,bg="#d9d9f2")
+        txtToplam2.pack(padx=20, pady=30)
 
 
         im.execute("SELECT SUM(ucret) FROM ucretler")
         ucretler = im.fetchall()
         print(ucretler)
-        if(ucretler[0][0]=="None"):
-            txtToplam2.config(text="Kasiyer Boştur..")
-        else:
-            txtToplam2.config(text=(ucretler,"TL"))
+        txtToplam2.config(text=(ucretler,"TL"))
 
-        b2 = Button(girsayfasi, text="Günü Sonlandır!", bg="red", command=sonlandir)
+        b2 = Button(girsayfasi, text="Günü Sonlandır!",command=sonlandir, bg="#d9d9f2")
         b2.pack(padx=30, pady=30)
-
 
 def sonlandir():
     result = messagebox.askyesno(title="Sonlandir", message="Son Günün Tüm Bilgileri Silincek, Devam Etmek İstiyor Musunuz?")
@@ -266,10 +247,10 @@ def sonlandir():
         vt.commit()
 
 
-b2 = Button(root, text="Kıralayıcı", width=30,height=5, command=kiralayici,bg="#ffa366")
+b2 = Button(root, text="Kıralayıcı", width=30,height=5, command=kiralayici,bg="#d9d9f2")
 b2.pack(padx=20, pady=50)
 
-b1 = Button(root, text="Yöneticin", width=30,height=5, command=yonetici,bg="#ffa366")
+b1 = Button(root, text="Yöneticin", width=30,height=5, command=yonetici,bg="#d9d9f2")
 b1.pack(padx=20, pady=50)
 
 mainloop()
